@@ -1,8 +1,9 @@
 package com.mzbloc.demo.sample101.controller;
 
-import com.mzbloc.demo.sample101.service.TestCaseService;
+import com.alibaba.dubbo.config.annotation.Reference;
 import com.mzbloc.elasticsearch.entity.ClienteEntity;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.mzbloc.elasticsearch.service.ClienteService;
+import com.mzbloc.elasticsearch.service.TestService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -12,17 +13,20 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class TestCaseController {
 
-    @Autowired
-    private TestCaseService testCaseService;
+    @Reference
+    private TestService testService;
+
+    @Reference
+    private ClienteService clienteService;
 
 
     @RequestMapping("say")
     public String say(){
-        return testCaseService.say();
+        return testService.say();
     }
 
     @RequestMapping("findCliente")
     public ClienteEntity findCliente(String id){
-        return testCaseService.findCliente(id);
+        return clienteService.findCliente(id);
     }
 }
