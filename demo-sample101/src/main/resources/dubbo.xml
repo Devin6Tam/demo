@@ -10,15 +10,20 @@
        http://code.alibabatech.com/schema/dubbo
        http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
-    <dubbo:annotation package="com.mzbloc.demo.sample101.service"/>
-    <context:component-scan base-package="com.mzbloc.demo.sample101"/>
     <!-- 提供方应用信息，用于计算依赖关系 -->
     <dubbo:application name="elasticsearch-comsumer"/>
     <!-- 使用zookeeper注册中心暴露服务地址 -->
     <dubbo:registry address="zookeeper://192.168.190.180:2181" client="zkclient" check="false"/>
-    <!-- 声明需要暴露的服务接口 -->
+
+    <!-- 引用暴露的服务接口 -->
+    <!-- 使用@com.alibaba.dubbo.config.annotation.Reference注解,自动包装了服务-->
+    <dubbo:annotation package="com.mzbloc.demo.sample101.service,com.mzbloc.demo.sample101.controller"/>
+
+    <!--
+    使用@org.springframework.stereotype.Autowired注解,需要主动配置需要引用的服务-->
+    <!--
     <dubbo:reference interface="com.mzbloc.elasticsearch.service.TestService" id="testService"/>
 
     <dubbo:reference interface="com.mzbloc.elasticsearch.service.ClienteService" id="clienteService"/>
-
+    -->
 </beans>
