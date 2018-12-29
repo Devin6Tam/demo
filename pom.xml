@@ -18,6 +18,7 @@
 
 	<modules>
 		<module>demo-sample101</module>
+		<module>demo-sample102</module>
 	</modules>
 
 	<properties>
