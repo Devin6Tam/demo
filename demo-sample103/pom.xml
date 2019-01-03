@@ -3,24 +3,16 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>1.4.0.RELEASE</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<groupId>com.mzbloc.demo</groupId>
+		<artifactId>demo</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-
-	<groupId>com.mzbloc.demo</groupId>
-	<artifactId>demo</artifactId>
+	<groupId>com.mzbloc.demo.sample103</groupId>
+	<artifactId>demo-sample103</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>pom</packaging>
-	<name>demo</name>
-	<description>mzbloc study demo </description>
-
-	<modules>
-		<module>demo-sample101</module>
-		<module>demo-sample102</module>
-		<module>demo-sample103</module>
-	</modules>
+	<packaging>jar</packaging>
+	<name>demo-sample103</name>
+	<description>mzbloc study demo</description>
 
 	<properties>
 		<java.version>1.8</java.version>
@@ -29,13 +21,22 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter</artifactId>
+			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
+			<artifactId>spring-boot-starter-amqp</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>1.1.39</version>
+		</dependency>
+		<dependency>
+			<groupId>com.mzbloc.rabbitmq.api</groupId>
+			<artifactId>rabbitmq-api</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 
@@ -44,9 +45,6 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
-					<skip>true</skip>
-				</configuration>
 			</plugin>
 		</plugins>
 	</build>
