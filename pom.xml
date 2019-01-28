@@ -20,7 +20,8 @@
 		<module>demo-sample101</module>
 		<module>demo-sample102</module>
 		<module>demo-sample103</module>
-	</modules>
+        <module>demo-sample104</module>
+    </modules>
 
 	<properties>
 		<java.version>1.8</java.version>
