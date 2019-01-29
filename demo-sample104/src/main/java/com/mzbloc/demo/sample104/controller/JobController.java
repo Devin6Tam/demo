@@ -1,7 +1,9 @@
 package com.mzbloc.demo.sample104.controller;
 
+import com.mzbloc.elasticJob.dynamic.bean.DynamicJob;
 import com.mzbloc.elasticJob.dynamic.bean.MyJob;
 import com.mzbloc.elasticJob.dynamic.service.MyJobService;
+import com.mzbloc.elasticJob.handler.ElasticJobHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +19,9 @@ public class JobController {
 
     @Autowired
     private MyJobService jobService;
+
+    @Autowired
+    private ElasticJobHandler elasticJobHandler;
 
 
     /**
@@ -81,6 +86,31 @@ public class JobController {
 
         try {
             jobService.addJob(job);
+        } catch (Exception e) {
+            result.put("status", false);
+            result.put("message", e.getMessage());
+        }
+        return result;
+    }
+
+
+
+    /**
+     * 添加动态任务
+     * @return
+     */
+    @PostMapping("/job/add2")
+    public Object addDynamicJob() {
+        Map<String, Object> result = new HashMap<String, Object>();
+        result.put("status", true);
+        try {
+            DynamicJob dynamicJob = new DynamicJob();
+            dynamicJob.setJobName("testJob2");
+            dynamicJob.setCron("0 0/5 * * * ?");
+            dynamicJob.setShardingTotalCount(1);
+            dynamicJob.setShardingItemParameters("0=0,1=1");
+            elasticJobHandler.addJob(dynamicJob);
+            result.put("message", "任务添加成功");
         } catch (Exception e) {
             result.put("status", false);
             result.put("message", e.getMessage());

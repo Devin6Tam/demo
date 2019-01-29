@@ -9,23 +9,21 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * Created by tanxw on 2019/1/24.
+ * Created by tanxw on 2019/1/28.
  */
-@ElasticJobConf(name = "testJob", cron = "0/10 * * * * ?",
-        shardingItemParameters = "0=0,1=1", description = "简单打印任务")
+@ElasticJobConf(name = "mySimpleJob2")
 @Component
-public class TestJob implements SimpleJob{
+public class MySimpleJob2 implements SimpleJob{
 
     @Override
     public void execute(ShardingContext shardingContext) {
-        System.out.println(2/0);
         String shardParamter = shardingContext.getShardingParameter();
-        System.out.println("testJob分片参数："+shardParamter);
+        System.out.println("分片参数："+shardParamter);
         int value = Integer.parseInt(shardParamter);
         for (int i = 0; i < 100; i++) {
             if (i % 2 == value) {
                 String time = new SimpleDateFormat("HH:mm:ss").format(new Date());
-                System.out.println(time + ":开始执行简单的testJob任务" + i);
+                System.out.println(time + ":开始执行简单任务" + i);
             }
         }
     }
