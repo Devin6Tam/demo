@@ -1,5 +1,6 @@
 package com.mzbloc.demo.sample105.interceptor;
 
+import com.mzbloc.springboot.cxf.soap.param.ClientRequestParamVo;
 import org.apache.cxf.binding.soap.SoapMessage;
 import org.apache.cxf.headers.Header;
 import org.apache.cxf.helpers.DOMUtils;
@@ -17,13 +18,11 @@ import java.util.List;
  */
 public class ClientLoginInterceptor extends AbstractPhaseInterceptor<SoapMessage> {
 
-    private String username;
-    private String password;
+    private ClientRequestParamVo clientRequestParamVo;
 
-    public ClientLoginInterceptor(String username, String password) {
+    public ClientLoginInterceptor(ClientRequestParamVo clientRequestParamVo) {
         super(Phase.PREPARE_SEND);
-        this.username = username;
-        this.password = password;
+        this.clientRequestParamVo = clientRequestParamVo;
     }
     @Override
     public void handleMessage(SoapMessage soap) throws Fault {
@@ -32,8 +31,8 @@ public class ClientLoginInterceptor extends AbstractPhaseInterceptor<SoapMessage
         Element auth = doc.createElement("authrity");
         Element username = doc.createElement("username");
         Element password = doc.createElement("password");
-        username.setTextContent(this.username);
-        password.setTextContent(this.password);
+        username.setTextContent(clientRequestParamVo.getUsername());
+        password.setTextContent(clientRequestParamVo.getPassword());
         auth.appendChild(username);
         auth.appendChild(password);
         headers.add(0, new Header(new QName("tiamaes"),auth));
