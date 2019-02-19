@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * 自动配置web服务（一次性配置，服务增加无需继续修改配置）
  * Created by tanxw on 2019/1/31.
  */
 @Configuration
@@ -29,7 +30,7 @@ public class SoapConfig {
     @Bean
     public ServletRegistrationBean dispatcherServlet() {
         SoapServlet soapServlet = new SoapServlet();
-        soapServlet.setSoapProperties(soapProperties,inInterceptors(),null);
+        soapServlet.initSoapProperties(soapProperties,inInterceptors(),null);
         return new ServletRegistrationBean(soapServlet,soapProperties.getServerUrl());
     }
 

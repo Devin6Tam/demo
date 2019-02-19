@@ -1,8 +1,8 @@
 package com.mzbloc.demo.sample105.demo;
 
+import com.mzbloc.demo.sample105.helper.SoapHelper;
 import com.mzbloc.demo.sample105.interceptor.ClientLoginInterceptor;
 import com.mzbloc.demo.sample105.soap.DemoService;
-import com.mzbloc.springboot.cxf.soap.helper.SoapHelper;
 import com.mzbloc.springboot.cxf.soap.param.ClientRequestParamVo;
 import org.junit.Assert;
 import org.junit.Test;

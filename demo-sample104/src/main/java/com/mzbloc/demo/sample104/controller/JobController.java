@@ -1,5 +1,6 @@
 package com.mzbloc.demo.sample104.controller;
 
+import com.mzbloc.demo.sample104.job.DynamicImplJob;
 import com.mzbloc.elasticJob.dynamic.bean.DynamicJob;
 import com.mzbloc.elasticJob.dynamic.bean.MyJob;
 import com.mzbloc.elasticJob.dynamic.service.MyJobService;
@@ -43,7 +44,8 @@ public class JobController {
     }
 
     /**
-     * 添加动态任务（适用于脚本逻辑已存在的情况，只是动态添加了触发的时间）
+     * 添加动态任务（JobType:SIMPLE，DATAFLOW，SCRIPT）
+     *
      * @param job	任务信息
      * @return
      */
@@ -96,7 +98,7 @@ public class JobController {
 
 
     /**
-     * 添加动态任务
+     * 添加动态任务（JobType:默认SIMPLE）
      * @return
      */
     @PostMapping("/job/add2")
@@ -109,6 +111,7 @@ public class JobController {
             dynamicJob.setCron("0 0/5 * * * ?");
             dynamicJob.setShardingTotalCount(1);
             dynamicJob.setShardingItemParameters("0=0,1=1");
+            dynamicJob.setJobImplClass(DynamicImplJob.class);
             elasticJobHandler.addJob(dynamicJob);
             result.put("message", "任务添加成功");
         } catch (Exception e) {
