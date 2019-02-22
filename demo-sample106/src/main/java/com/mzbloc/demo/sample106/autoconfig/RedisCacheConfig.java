@@ -3,7 +3,9 @@ package com.mzbloc.demo.sample106.autoconfig;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mzbloc.demo.sample106.consumer.AreaMessageListener;
 import com.mzbloc.demo.sample106.consumer.UserMessageListener;
+import com.mzbloc.demo.sample106.consumer.UserMessageListener2;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CachingConfigurerSupport;
 import org.springframework.cache.annotation.EnableCaching;
@@ -108,6 +110,8 @@ public class RedisCacheConfig extends CachingConfigurerSupport {
         RedisMessageListenerContainer container = new RedisMessageListenerContainer();
         container.setConnectionFactory(connectionFactory);
         container.addMessageListener(listenerAdapter,new PatternTopic("phone"));
+        container.addMessageListener(new AreaMessageListener(),new PatternTopic("areaData"));
+        container.addMessageListener(new UserMessageListener2(),new PatternTopic("userData"));
         return container;
     }
 

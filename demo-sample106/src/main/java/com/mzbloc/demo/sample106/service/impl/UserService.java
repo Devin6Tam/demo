@@ -27,7 +27,7 @@ public class UserService extends BaseService<User> implements IUserService{
     }
 
     @Override
-    @Cacheable(value = "common",unless = "#result == null")
+    @Cacheable(value = "userData",unless = "#result == null")
     public List<User> getUserList(){
         return userMapper.queryUser();
     }

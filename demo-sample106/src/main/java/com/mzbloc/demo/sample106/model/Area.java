@@ -1,5 +1,7 @@
 package com.mzbloc.demo.sample106.model;
 
+import lombok.Data;
+
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -13,6 +15,7 @@ import java.util.List;
  * Created by tanxw on 2016/12/9.
  */
 @Table(name = "area")
+@Data
 public class Area implements Serializable {
     @Id
     @Column(name="id")
@@ -28,54 +31,4 @@ public class Area implements Serializable {
 
     @Transient
     private List<Area> sonAreaList = new ArrayList<>();
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Integer getCode() {
-        return code;
-    }
-
-    public void setCode(Integer code) {
-        this.code = code;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public Integer getParentCode() {
-        return parentCode;
-    }
-
-    public void setParentCode(Integer parentCode) {
-        this.parentCode = parentCode;
-    }
-
-    @Transient
-    public List<Area> getSonAreaList() {
-        return sonAreaList;
-    }
-
-    @Transient
-    public void setSonAreaList(List<Area> sonAreaList) {
-        this.sonAreaList = sonAreaList;
-    }
 }
