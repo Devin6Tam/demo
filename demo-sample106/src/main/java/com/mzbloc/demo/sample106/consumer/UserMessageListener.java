@@ -15,11 +15,7 @@ public class UserMessageListener {
 
     private static final Logger logger = LoggerFactory.getLogger(UserMessageListener.class);
 
-    @Autowired
-    private CountDownLatch latch;
-
     public void receiveMessage(String message) {
-        logger.info("Received <" + message + ">");
-        latch.countDown();
+        logger.info("Received <{}>",message);
     }
 }

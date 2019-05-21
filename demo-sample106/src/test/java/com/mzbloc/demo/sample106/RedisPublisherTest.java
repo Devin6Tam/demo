@@ -1,26 +1,24 @@
 package com.mzbloc.demo.sample106;
 
-import com.mzbloc.demo.sample106.service.impl.RedisService;
+
+import com.mzbloc.springboot.redis.service.IRedisService;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.redis.core.ListOperations;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.data.redis.core.StringRedisTemplate;
 
 /**
  * Created by tanxw on 2019/2/22.
  */
-@RunWith(SpringRunner.class)
-@SpringBootTest(classes = DemoSample106Application.class)
-public class RedisPublisherTest {
+public class RedisPublisherTest extends DemoSample106ApplicationTests{
 
     private static Logger logger= LoggerFactory.getLogger(RedisPublisherTest.class);
 
     @Autowired
-    RedisService redisService;
+    StringRedisTemplate stringRedisTemplate;
+    @Autowired
+    IRedisService redisService;
 
 
     @Test

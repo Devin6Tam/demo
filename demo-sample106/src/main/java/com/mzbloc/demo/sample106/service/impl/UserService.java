@@ -1,10 +1,10 @@
 package com.mzbloc.demo.sample106.service.impl;
 
-import com.fasterxml.jackson.databind.deser.Deserializers;
 import com.mzbloc.demo.sample106.dao.UserMapper;
 import com.mzbloc.demo.sample106.model.User;
 import com.mzbloc.demo.sample106.service.IUserService;
 import com.mzbloc.springboot.mybatis.common.service.impl.BaseService;
+import com.mzbloc.springboot.redis.annotation.RedisLockAnnoation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -28,6 +28,7 @@ public class UserService extends BaseService<User> implements IUserService{
 
     @Override
     @Cacheable(value = "userData",unless = "#result == null")
+    @RedisLockAnnoation(keyPrefix = "lock_",keys = {"getUserList"},isSpin = false)
     public List<User> getUserList(){
         return userMapper.queryUser();
     }

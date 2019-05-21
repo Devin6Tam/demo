@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+       http://code.alibabatech.com/schema/dubbo
+       http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <!-- 提供方应用信息，用于计算依赖关系 -->
+    <dubbo:application name="redis-demo-server"/>
+    <!-- 使用zookeeper注册中心暴露服务地址
+    <dubbo:registry protocol="${dubbo.registry.protocol}"  file="${dubbo.registry.file}"  address="${dubbo.registry.address}" password="${dubbo.registry.password}" />
+    -->
+    <dubbo:registry address="redis://192.168.42.26:6379?password=abc123456" check="false"/>
+
+    <!-- 用dubbo协议在20880端口暴露服务 -->
+    <dubbo:protocol name="dubbo" port="20880"/>
+    <!-- 生产者线程使用 线程开启数，负载均衡模式-->
+    <dubbo:provider timeout="10000"  threads="50" threadpool="fixed" loadbalance="roundrobin"/>
+
+    <dubbo:consumer check="false"/>
+
+    <!-- 使用@com.alibaba.dubbo.config.annotation.Service注解,自动包装了服务-->
+    <dubbo:annotation package="com.mzbloc.demo.sample106.dubbo"/>
+
+    <!--
+    使用@org.springframework.stereotype.Service("testService")注解,需要主动配置服务-->
+    <!--
+    <dubbo:service interface="com.mzbloc.elasticsearch.service.TestService" ref="testService" protocol="dubbo"/>
+
+    <dubbo:service interface="com.mzbloc.elasticsearch.service.ClienteService" ref="clienteService" protocol="dubbo"/>
+    -->
+</beans>

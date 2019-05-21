@@ -1,11 +1,14 @@
 package com.mzbloc.demo.sample106.consumer;
 
+
+import com.mzbloc.springboot.redis.annotation.RedisMessageListener;
 import org.springframework.data.redis.connection.Message;
 import org.springframework.data.redis.connection.MessageListener;
 
 /**
  * Created by tanxw on 2019/2/22.
  */
+@RedisMessageListener(topics = {"userData"})
 public class UserMessageListener2 implements MessageListener {
 
     /**
