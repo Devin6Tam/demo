@@ -27,14 +27,14 @@ public class SwaggerController {
      *
      * @return
      */
-    @ApiOperation(value="Get all users",notes="requires noting")
+    @ApiOperation(value="Get all users",notes="requires nothing")
     @RequestMapping(method= RequestMethod.GET)
     public List<User> getUsers(){
         List<User> list = userService.selectByList(new Example(User.class));
         return list;
     }
 
-    @ApiOperation(value="Get user with name",notes="requires the id of user")
+    @ApiOperation(value="Get user with name",notes="requires the name of user")
     @RequestMapping(value="/{name}",method= RequestMethod.GET)
     public User getUserById(@PathVariable String name){
         User user=new User();
