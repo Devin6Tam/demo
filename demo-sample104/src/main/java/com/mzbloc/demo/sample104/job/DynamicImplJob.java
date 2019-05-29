@@ -19,6 +19,9 @@ public class DynamicImplJob implements SimpleJob{
                 System.out.println("doing sharding 1...job name is "+shardingContext.getJobName());
                 // do something by sharding item 1
                 break;
+            default:
+                System.out.println("doing sharding 1...job name is "+shardingContext.getJobName());
+                // do something by sharding item 1
         }
     }
 }

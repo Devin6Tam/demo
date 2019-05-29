@@ -16,7 +16,7 @@ public class UserMessageListener2 implements MessageListener {
      */
     @Override
     public void onMessage(Message message, byte[] pattern) {
-        if(new String(message.getChannel()).equals("userData")) {
+        if("userData".equals(new String(message.getChannel()))) {
             // 缓存消息是序列化的，需要反序列化。然而new String()可以反序列化，但静态方法valueOf()不可以
             System.out.println(new String(pattern) + "主题发布：" + new String(message.getBody()));
         }

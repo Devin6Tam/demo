@@ -18,7 +18,7 @@ import java.util.List;
  * Created by tanxw on 2019/2/22.
  */
 @Service
-public class AreaService extends BaseService<Area> implements IAreaService{
+public class AreaServiceImpl extends BaseService<Area> implements IAreaService{
 
     @Autowired
     private AreaMapper areaMapper;

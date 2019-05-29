@@ -16,7 +16,7 @@ import java.util.List;
  * Created by tanxw on 2017/3/30.
  */
 @Service
-public class UserService extends BaseService<User> implements IUserService{
+public class UserServiceImpl extends BaseService<User> implements IUserService{
 
     @Autowired
     private UserMapper userMapper;
