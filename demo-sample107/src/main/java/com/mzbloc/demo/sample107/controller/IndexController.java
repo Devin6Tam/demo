@@ -4,8 +4,6 @@ import com.mzbloc.demo.sample107.vo.ResponseResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Map;
-
 /**
  * @author tanxw
  * @date 2019/6/25

@@ -1,4 +1,4 @@
-## 基于jdk8环境
+## 来源镜像
 FROM txtxw/java
 #FROM demo-sample107:0.0.1
 ## 指定唯一维护对象

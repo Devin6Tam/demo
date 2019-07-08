@@ -23,6 +23,8 @@
         <module>demo-sample104</module>
 		<module>demo-sample105</module>
 		<module>demo-sample106</module>
+		<module>demo-sample107</module>
+		<module>demo-sample108</module>
     </modules>
 
 	<properties>

@@ -93,6 +93,12 @@
 			<version>${mzbloc.redis.version}</version>
 		</dependency>
 
+		<!-- springboot 热部署（页面、代码） -->
+		<!--<dependency>-->
+			<!--<groupId>org.springframework.boot</groupId>-->
+			<!--<artifactId>spring-boot-devtools</artifactId>-->
+		<!--</dependency>-->
+
 	</dependencies>
 
 	<build>
@@ -100,6 +106,14 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<!-- 加入此段，可以将程序设置成linux服务
+				 sudo ln -s /data0/java/demo-sample107-0.0.1.jar /etc/init.d/sample107
+				 service start|stop|status sample107 启动|停止|查看状态  服务
+				 chkconfig sample107 on  开机启动服务
+				 -->
+				<!--<configuration>-->
+					<!--<executable>true</executable>-->
+				<!--</configuration>-->
 			</plugin>
 		</plugins>
 	</build>
