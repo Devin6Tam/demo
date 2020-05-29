@@ -1,0 +1,4 @@
+安装说明：
+prometheus-grafana.yaml  开放节点端口访问
+prometheus-grafana-proxy.yaml 仅通过代理方式访问
+prometheus-grafana-rbac.yaml 认证授权，与kube-apiserver访问待完善

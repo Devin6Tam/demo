@@ -1,0 +1,124 @@
+kind 类别有哪些？
+
+工作负载型资源
+Pod,跟容器
+Deployment,部署
+ReplicationController(简称rc), 副本控制器
+ReplicaSet(俗称下一代的rc)
+Endpoints, 端点
+DaemonSet,守护进程
+StatefulSet, 状态集
+Job 任务
+CronJob 定时任务
+
+
+服务发现及负载均衡型资源
+Service,开放服务
+Ingress,负载负载均衡
+
+配置与存储型资源
+Volume(存储卷)
+CSI(容器存储接口,可以扩展各种各样的第三方存储卷)
+
+特殊类型的存储卷
+ConfigMap,配置中心
+Secret,保存敏感数据
+DownwardAPI(把外部环境中的信息输出给容器)
+
+
+元数据型资源
+HorizontalPodAutoscaler（简称HPC）, 横向自动扩容
+PodTemplate(Pod模板,用于让控制器创建Pod时使用的模板)
+LimitRange(用来定义硬件资源限制的)
+
+集群资源
+Namespace 命令空间
+Node 节点
+ServiceAccount, 允许访问服务账号
+Role,角色
+RoleBinding, 角色绑定
+ClusterRole, 集群角色
+ClusterRoleBinding,集群角色绑定
+
+
+apiVersion赋值时，每个kind需使用对应的值，可以根据kubectl explain [kindName]来获取
+
+kubectl api-versions
+
+获取1.13.3 版本的kubectl的api版本信息
+admissionregistration.k8s.io/v1beta1     
+apiextensions.k8s.io/v1beta1
+apiregistration.k8s.io/v1               
+apiregistration.k8s.io/v1beta1
+apps/v1                                 
+apps/v1beta1
+apps/v1beta2
+authentication.k8s.io/v1
+authentication.k8s.io/v1beta1
+authorization.k8s.io/v1
+authorization.k8s.io/v1beta1
+autoscaling/v1
+autoscaling/v2beta1
+autoscaling/v2beta2                   
+batch/v1
+batch/v1beta1
+certificates.k8s.io/v1beta1
+coordination.k8s.io/v1beta1           
+crd.projectcalico.org/v1              
+events.k8s.io/v1beta1                 
+extensions/v1beta1
+networking.k8s.io/v1
+policy/v1beta1
+rbac.authorization.k8s.io/v1
+rbac.authorization.k8s.io/v1beta1
+scheduling.k8s.io/v1beta1            
+storage.k8s.io/v1
+storage.k8s.io/v1beta1
+v1
+
+
+yaml 模板
+apiVersion： api版本
+kind: 资源类型
+metadata: #元数据
+  name: 名字
+  namespace:所在命名空间
+  labels: 标签信息（可以多个）
+    ##标签是key：value格式的key，value最长只能使用63个字符
+    # key只能是以数字、之母、_、-、点（.）这五类的组合，
+     #value可以为空，但只能以数字及字母开头或结尾
+    app: 标签内容
+  annotations: #注释（不具备什么功能 就是注释 ）
+    zhushi： ”lalalalalalalal saddas”
+spec:期望状态
+  containers:容器信息（可以多个名称云镜像）
+  - name: 自定义name名称
+    image：镜像名
+  - name：
+    image：
+  nodeSelector:#节点选择器（如给指定运行在disk为ssd的node上）
+    disk: ssd
+  imagePullPolicy:#是否使用本地或远端的下载镜像
+    #1、Always
+    #2、Never
+    #3、IfNotPresent
+  livenessProbe：#存活性探针
+　　　　#1、exec #命令
+
+　　　　#2、httpGet #http请求 指定ip:port
+
+　　　　#3、tcpSocket  #
+
+    readinessProbe：#就绪状态探针
+
+ 　　　　#1、exec #命令
+
+　　　　#2、httpGet #http请求 指定ip:port
+
+　　　　#3、tcpSocket  #
+
+
+
+
+
+参考：https://www.cnblogs.com/zhangb8042/p/9572701.html

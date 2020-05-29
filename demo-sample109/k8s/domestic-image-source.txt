@@ -1,0 +1,7 @@
+当通过镜像来运行容器，或通过容器编排（docker-compose、k8s）来启动服务时，所需要的镜像不能下载时
+可以通过翻墙（vpn）、改变镜像源来实现镜像下载、通过在vultr租用服务器来建立企业级镜像应用
+
+国内镜像
+mirrorgooglecontainers   谷歌镜像
+registry.cn-hangzhou.aliyuncs.com/google_containers  阿里（杭州）镜像
+registry.aliyuncs.com/google_containers 阿里镜像

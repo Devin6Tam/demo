@@ -1,0 +1,7 @@
+Kubernetes CNI（0.6.0 对应k8s 1.13.3版本）
+主要流行使用有 Flannel,Calico,Cannal,Weave等网络插件
+
+Flannel 容易安装和配置,适用于初期使用，比较稳妥，后续网络服务无法提供，就需要做其他选择。
+Calico 以其性能、灵活性而闻名。不使用overlay网络
+Cannal （项目维护烂尾，但是结合了Flannel,Calico两种插件的特性，使得它比较受欢迎）
+Weave 为寻求功能丰富的网络、同时希望不要增加大量复杂性或管理难度，这是个不错的选择

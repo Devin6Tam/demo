@@ -1,0 +1,82 @@
+Initial idea was taken from this dashboard and improved to exclude node-exporter dependency and to give more information about cluster state.
+
+Requirements
+You only need to have running Kubernetes cluster with deployed Prometheus. Prometheus will use metrics provided by cAdvisor via kubelet service (runs on each node of Kubernetes cluster by default) and via kube-apiserver service only.
+
+Your Prometheus configuration has to contain following scrape_configs:
+
+scrape_configs:
+
+
+  - job_name: kubernetes-nodes-cadvisor
+    scrape_interval: 10s
+    scrape_timeout: 10s
+    scheme: https  # remove if you want to scrape metrics on insecure port
+    tls_config:
+      ca_file: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+    bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
+    kubernetes_sd_configs:
+      - role: node
+    relabel_configs:
+      - action: labelmap
+        regex: __meta_kubernetes_node_label_(.+)
+      - target_label: __address__
+        replacement: kubernetes.default.svc:443
+      - source_labels: [__meta_kubernetes_node_name]
+        regex: (.+)
+        target_label: __metrics_path__
+        replacement: /api/v1/nodes/${1}/proxy/metrics/cadvisor
+    metric_relabel_configs:
+      - action: replace
+        source_labels: [id]
+        regex: '^/machine\.slice/machine-rkt\\x2d([^\\]+)\\.+/([^/]+)\.service$'
+        target_label: rkt_container_name
+        replacement: '${2}-${1}'
+      - action: replace
+        source_labels: [id]
+        regex: '^/system\.slice/(.+)\.service$'
+        target_label: systemd_service_name
+        replacement: '${1}'
+
+
+  - job_name: kubernetes-nodes-kubelet
+        kubernetes_sd_configs:
+        - role: node
+        scheme: https
+        tls_config:
+          ca_file: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+          insecure_skip_verify: true
+        bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
+        relabel_configs:
+        - action: labelmap
+          regex: __meta_kubernetes_node_label_(.+)
+        - target_label: __address__
+          replacement: kubernetes.default.svc:443
+        - source_labels: [__meta_kubernetes_node_name]
+          regex: (.+)
+          target_label: __metrics_path__
+          replacement: /api/v1/nodes/${1}/proxy/metrics
+
+Features
+Total and used cluster resources: CPU, memory, filesystem.
+And total cluster network I/O pressure.
+Total and used cluster resources
+
+Kubernetes pods usage: CPU, memory, network I/O.
+Pods usage
+Containers usage: CPU, memory, network I/O.
+
+
+Docker and rkt containers which runs on cluster nodes but outside Kubernetes are also monitored.
+Containers usage
+
+
+systemd system services usage: CPU, memory.
+systemd usage
+
+Showing all above metrics both for all cluster and each node separately.
+Filtering metrics by nodes
+
+
+Troubleshooting
+If filesystem usage panels display N/A, you should correct device=~"^/dev/[vs]da9$" filter parameter in metrics query with devices your system actually has.
